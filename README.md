@@ -22,16 +22,16 @@
 - FileName : `test_builtin.py`
 
 - Error Location :
-def test_bytearray_translate(self):
-        x = bytearray(b"abc")
-        self.assertRaises(ValueError, x.translate, b"1", 1) # <- error
+def test_bytearray_translate(self): <br>
+        x = bytearray(b"abc") <br>
+        self.assertRaises(ValueError, x.translate, b"1", 1) # <- error <br>
         self.assertRaises(TypeError, x.translate, b"1"*256, 1)
         
 - Reason : CPython과 RustPython에서의 오류를 비교함
-CPython > ValueError: translation table must be 256 characters long O
+CPython > ValueError: translation table must be 256 characters long O <br>
 정상 : 정상적으로 ValueError로 처리됨 
 
-RustPython > TypeError: 'int' object is not iterable X 
+RustPython > TypeError: 'int' object is not iterable X <br>
 에러 : ValueError로 처리되어야 하는데 TypeError로 처리됨
 
 - Issue Tracing :
@@ -114,6 +114,6 @@ RustPython > AssertionError: TypeError not raised by from_bytes
 운영진분들 덕분에 정말 뜻깊은 경험이 될 수 있었고 이번에 멘토로 참가하신 신지홍 멘토님께서 원래 멘티로 참여하셨다가 멘토가 되신것 처럼 나도 언젠가 멘티에서 멘토가
 된다면 좋을 것 같다! 정말 재밌었고 좋은 경험이었습니다! 감사합니다!!!                                                            
       
-# [ Pull Request]
+# [ Pull Request ]
                                                             
 # [ 사진 ]                                                             
