@@ -55,8 +55,8 @@ CPython \> ValueError: translation table must be 256 characters long O
   15. table에서와 같이 delete에서도 let byte: PyBytesInner = byte.try_into_value(vm)?; 로 PyObjectRef로 받은걸 다시 PyBytesInner로 바꿔줌 [File: bytesinner.rs, line:227]
   16. 수정 끝
   
-- Additional modifications : 
-  Reason - 정윤원 멘토님이 중복되는 에러 핸들링 부분들을 통합할 수 있다고 추가 수정사항을 주셨음  
+- Additional modifications :  
+  Reason \> 정윤원 멘토님이 중복되는 에러 핸들링 부분들을 통합할 수 있다고 추가 수정사항을 주셨음  
   let bytes = v  
                     .try_into_value::\<PyBytesInner\>(vm)  
                     .ok()  
