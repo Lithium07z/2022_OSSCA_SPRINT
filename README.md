@@ -7,7 +7,7 @@
 
 - FileName : `array.rs` 
 
-- Reaseon : RustPython > AttributeError: module 'array' has no attribute 'Arraytype'  
+- Reaseon : RustPython \> AttributeError: module 'array' has no attribute 'Arraytype'  
         &nbsp;&nbsp;array모듈에 ArrayType 기능이 없음
             
 - Issue Tracing :
@@ -28,10 +28,10 @@ def test_bytearray_translate(self):
          self.assertRaises(TypeError, x.translate, b"1"*256, 1)  
         
 - Reason : CPython과 RustPython에서의 오류를 비교함  
-CPython > ValueError: translation table must be 256 characters long O  
+CPython \> ValueError: translation table must be 256 characters long O  
 정상 : 정상적으로 ValueError로 처리됨  
 
-  RustPython > TypeError: 'int' object is not iterable X   
+  RustPython \> TypeError: 'int' object is not iterable X   
   에러 : ValueError로 처리되어야 하는데 TypeError로 처리됨
 
 - Issue Tracing :
@@ -42,7 +42,7 @@ CPython > ValueError: translation table must be 256 characters long O
   5. ByteInnerTranslateOptions는 table이 올바른 타입이 아니면 자동으로 TypeError반환(러스트 특징) [File: bytesinner.rs, line:205]
   6. TypeError를 자동으로 반환하지 않도록 하고 ValueError로 반환하도록 고쳐야함 
   7. table먼저 수정함
-  8. pub struct ByteInnerTranslateOptions { ~ }의 table: Option<PyBytesInner>에서 Option<PyObjectRef>로 변환,  
+  8. pub struct ByteInnerTranslateOptions { ~ }의 table: Option\<PyBytesInner\>에서 Option\<PyObjectRef\>로 변환,  
      최상위 타입인 PyObjectRef로 먼저 받아서 자동으로 TypeError가 반환되는 것을 막음  [File: bytesinner.rs, line:205]
   9. impl ByteInnerTranslateOptions { ~ }은 table이 PyBytesInner 인것으로 생각하고 구현됬으니 바꿔주어야 함  
      [File: bytesinner.rs, line:214]
@@ -51,14 +51,14 @@ CPython > ValueError: translation table must be 256 characters long O
       let v: PyBytesInner = v.try_into_value(vm).map_err(|_| {vm.new_value_error("translation table must be 256 characters long".to_owned())})?;  [File: bytesinner.rs, line:215]
   12. ByteInnerTranslateOptions의 table에서 ValueError를 반환하도록함    [File: bytesinner.rs, line:215]
   13. delete에서도 똑같이 바꿔줌
-  14. delete: OptionalArg<PyBytesInner>에서 OptionalArg<PyObjectRef>로 바꿔줌    [File: bytesinner.rs, line 207]
+  14. delete: OptionalArg\<PyBytesInner\>에서 OptionalArg\<PyObjectRef\>로 바꿔줌    [File: bytesinner.rs, line 207]
   15. table에서와 같이 delete에서도 let byte: PyBytesInner = byte.try_into_value(vm)?; 로 PyObjectRef로 받은걸 다시 PyBytesInner로 바꿔줌 [File: bytesinner.rs, line:227]
   16. 수정 끝
   
 - Additional modifications : 
   Reason - 정윤원 멘토님이 중복되는 에러 핸들링 부분들을 통합할 수 있다고 추가 수정사항을 주셨음  
   let bytes = v  
-                    .try_into_value::<PyBytesInner>(vm)  
+                    .try_into_value::\<PyBytesInner\>(vm)  
                     .ok()  
                     .filter(|v| v.elements.len() == 256)  
                     .ok_or_else(|| {  
@@ -83,10 +83,10 @@ def test_from_bytes(self):
 self.assertRaises(TypeError, int.from_bytes, "", 'big')    [File: test_long.py, line: 1339]
   
 - Reason :  
-CPython > TypeError: cannot convert 'str' object to bytes  
+CPython \> TypeError: cannot convert 'str' object to bytes  
 정상 : str객체 때문에 TypeError가 발생해야 함  
 
-  RustPython > AssertionError: TypeError not raised by from_bytes  
+  RustPython \> AssertionError: TypeError not raised by from_bytes  
   에러 : from_bytes에서 TypeError가 발생하지 않아서 self.assertRaises가 AssertionError를 반환함  
   
 - Issue Tracing : 
