@@ -43,13 +43,12 @@ CPython > ValueError: translation table must be 256 characters long O
   6. TypeError를 자동으로 반환하지 않도록 하고 ValueError로 반환하도록 고쳐야함 
   7. table먼저 수정함
   8. pub struct ByteInnerTranslateOptions { ~ }의 table: Option<PyBytesInner>에서 Option<PyObjectRef>로 변환,  
-     최상위 타입인 PyObjectRef로 먼저 받아서 자동으로 TypeError가 반환되는 것을 막음    [File: bytesinner.rs, line:205]
+     최상위 타입인 PyObjectRef로 먼저 받아서 자동으로 TypeError가 반환되는 것을 막음  [File: bytesinner.rs, line:205]
   9. impl ByteInnerTranslateOptions { ~ }은 table이 PyBytesInner 인것으로 생각하고 구현됬으니 바꿔주어야 함  
      [File: bytesinner.rs, line:214]
   10. v의 상태를 PyObjectRef로 받음    [File: bytesinner.re, line: 214]
   11. 그리고 다시 PyBytesInner로 바꿈  
-      let v: PyBytesInner = v.try_into_value(vm).map_err(|_| {vm.new_value_error("translation table must be 256 characters long".to_owned())})?;  
-      [File: bytesinner.rs, line:215]
+      let v: PyBytesInner = v.try_into_value(vm).map_err(|_| {vm.new_value_error("translation table must be 256 characters long".to_owned())})?;  [File: bytesinner.rs, line:215]
   12. ByteInnerTranslateOptions의 table에서 ValueError를 반환하도록함    [File: bytesinner.rs, line:215]
   13. delete에서도 똑같이 바꿔줌
   14. delete: OptionalArg<PyBytesInner>에서 OptionalArg<PyObjectRef>로 바꿔줌    [File: bytesinner.rs, line 207]
