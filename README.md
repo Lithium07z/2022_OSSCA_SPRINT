@@ -120,7 +120,7 @@ CPython \> TypeError: cannot convert 'str' object to bytes
       
 # [ Pull Request ]
 ![alt text](04.PNG)  
-![alt text](test_bytearray_translatePR.PNG)
+![alt text](test_bytearray_translate_PR.PNG)
 ![alt text](bytes_type_object_PR.PNG)
                                                             
 # [ 사진 ]                                                             
