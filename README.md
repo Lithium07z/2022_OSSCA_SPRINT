@@ -42,7 +42,8 @@ CPython과 RustPython에서의 오류를 비교함
 > 2. bytearray의 translate에 문제가 있는 것 같음    [File: test_builtin.py, line 1702]
 > 3. translate함수 내부의 ByteInnerTranslateOptions 확인    [File: bytearray.rs, line: 500]
 > 4. bytesinner.rs의 pub struct ByteInnerTranslateOptions확인    [File: bytesinner.rs, line: 203]
-> 5. ByteInnerTranslateOptions는 table이 올바른 타입이 아니면 자동으로 TypeError반환(러스트 특징) [File: bytesinner.rs, line:205]
+> 5. ByteInnerTranslateOptions는 table이 올바른 타입이 아니면 자동으로 TypeError반환(러스트 특징)  
+     [File: bytesinner.rs, line:205]
 > 6. TypeError를 자동으로 반환하지 않도록 하고 ValueError로 반환하도록 고쳐야함 
 > 7. table먼저 수정함
 > 8. pub struct ByteInnerTranslateOptions { ~ }의 table: Option\<PyBytesInner\>에서 Option\<PyObjectRef\>로 변환,  
