@@ -77,9 +77,9 @@ CPython \> ValueError: translation table must be 256 characters long O
  
 - FileName : `test_long.py`
   
-- Error Location : 
-def test_from_bytes(self):
-....
+- Error Location :  
+def test_from_bytes(self):  
+....  
 self.assertRaises(TypeError, int.from_bytes, "", 'big')    [File: test_long.py, line: 1339]
   
 - Reason :  
