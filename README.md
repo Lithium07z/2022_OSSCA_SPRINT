@@ -119,5 +119,8 @@ CPython \> TypeError: cannot convert 'str' object to bytes
 정말 재밌었고 좋은 경험이었습니다! 감사합니다!!!                                                            
       
 # [ Pull Request ]
+![alt text](04.PNG)
+![alt text](test_bytearray_translate PR.PNG)
+![alt text](bytes_type_object PR.PNG)
                                                             
 # [ 사진 ]                                                             
