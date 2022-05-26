@@ -129,4 +129,5 @@ CPython과 RustPython에서의 오류를 비교함
 ![alt text](test_bytearray_translate_PR.PNG)
 ![alt text](bytes_type_object_PR.PNG)
                                                             
-# [ 사진 ]                                                             
+# [ 사진 ]
+![alt text](2022_오픈소스_컨트리뷰션_아카데미_지역스프린트_춘천_수료증_005_김준호_1-page-001.jpg)
