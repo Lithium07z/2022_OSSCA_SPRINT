@@ -97,7 +97,7 @@ CPython과 RustPython에서의 오류를 비교함
   에러 : from_bytes에서 TypeError가 발생하지 않아서 self.assertRaises가 AssertionError를 반환함  
   
 - Issue Tracing : 
-> 1. TypeError를 출력해야하는데 TypeError가 발생하지 않아서 AssertionError가 발생함    
+> 1. TypeError를 출력해야하는데 TypeError가 발생하지 않아서 AssertionError가 발생함  
 > [File: test_long.py, Line: 1339]
 > 2. int함수 내부의 from_bytes에 문제가 있는 것 같음    [File: int.rs, Line: 626]
 > 3. from_bytes의 args: IntFromBytesArgs에 문제가 있는 것 같음    [File: int.rs, Line: 628]
