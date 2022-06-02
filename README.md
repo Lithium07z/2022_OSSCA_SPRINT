@@ -71,7 +71,8 @@ CPython과 RustPython에서의 오류를 비교함
                             "translation table must be 256 characters long".to_owned(),  
                         )  
                     })?;  
-                Ok(bytes.elements.to_vec())  
+                Ok(bytes.elements.to_vec())
+                
 - Result :  
 > 러스트도 낯설었고 파이썬의 bytearray 기능도 써본 적이 없는 기능이라 많이 고생하면서 고쳤다.  
            문제가 발생하는 위치를 따라가면서 어떤 코드가 문제인지 추적했고 그 과정에서 러스트의 match구문과 대수식 열거형에 대해 알 수 있었다.  
